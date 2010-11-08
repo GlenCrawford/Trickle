@@ -3,7 +3,6 @@ db/*.sqlite3
 log/*.log
 tmp/**/*
 config/database.yml
-db/seeds.rb
 .DS_Store
 Thumbs.db
-.PROJECT
+.project
