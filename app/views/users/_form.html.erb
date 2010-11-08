@@ -1,0 +1,71 @@
+<%= form_for(@user) do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+      <ul>
+      	<% @user.errors.full_messages.each do |msg| %>
+        	<li><%= msg %></li>
+      	<% end %>
+      </ul>
+    </div>
+  <% end %>
+
+	<div class="float-left">
+		<p>
+			<%= f.label :first_name %>
+			<%= f.text_field :first_name %>
+		</p>
+
+		<p>
+			<%= f.label :last_name %>
+			<%= f.text_field :last_name %>
+		</p>
+
+		<p>
+			<%= f.label :nick_name %>
+			<%= f.text_field :nick_name %>
+		</p>
+
+		<p>
+			<%= f.label :email %>
+			<%= f.text_field :email %>
+		</p>
+
+		<p>
+			<%= f.label :telephone_number, "Telephone" %>
+			<%= f.text_field :telephone_number %>
+		</p>
+
+		<p>
+			<%= f.label :mobile_number, "Mobile" %>
+			<%= f.text_field :mobile_number %>
+		</p>
+
+		<p>
+			<%= f.label :avatar %>
+			<%= f.text_field :avatar %>
+		</p>
+
+		<p>
+			<%= f.label :username %>
+			<%= f.text_field :username %>
+		</p>
+
+		<p>
+			<%= f.label :password %>
+			<%= f.password_field :password %>
+		</p>
+
+		<%= f.submit "Submit" %>
+	</div>
+
+	<div class="float-right user_role_selection">
+		<h2>Select a role</h2>
+		<% Role.all.each do |role| %>
+			<p>
+				<%= f.radio_button :role_id, role.id %>
+				<%= f.label role.name %>
+			</p>
+		<% end %>
+	</div>
+<% end %>

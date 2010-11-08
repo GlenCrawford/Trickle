@@ -1,0 +1,20 @@
+<% content_for :title, "#{@user.name}" %>
+
+<img src="<%= @user.avatar %>" alt="<%= @user.name %>" title="<%= @user.name %>" class="float-left big_avatar" />
+<p class="float-left">
+	<%= @user.first_name %> has <strong><%= @user.role.name %></strong> rights.
+	<br /><br />
+	<% if @user.telephone_number %>
+		<strong>T</strong> <%= @user.telephone_number %>
+	<% end %>
+	<br />
+	<% if @user.mobile_number %>
+		<strong>M</strong> <%= @user.mobile_number %>
+	<% end %>
+	<br />
+	<% if @user.email %>
+		<strong>E</strong> <%= mail_to @user.email %>
+	<% end %>
+	<br /><br />
+	<%= link_to 'Edit this user', edit_user_path(@user) %>
+</p>

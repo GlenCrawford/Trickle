@@ -1,0 +1,25 @@
+<% content_for :title, "Jobs" %>
+
+<% if @jobs.size == 0 %>
+	<p>There aren't any jobs in the system yet :(</p>
+<% else %>
+	<% @jobs.each do |job| %>
+		<div class="project_panel">
+			<strong><%= job.name %></strong>
+			<br />
+			Status: <%= job.status.capitalize %>
+			<br />
+			Client: <%= job.client.name %>
+			<br />
+			Total number of items: <%= job.tasks.size %>
+			<%= render :partial => "metrics", :locals => {:job => job} %>
+			<div class="project_options">
+				<%= link_to 'Go to this job', job %> | 
+				<%= link_to 'Edit this job', edit_job_path(job) %> | 
+				<%= link_to 'Delete this job', job, :confirm => 'Are you sure?', :method => :delete %>
+			</div>
+		</div>
+	<% end %>
+<% end %>
+
+<p><%= link_to 'Create a new job', new_job_path %></p>

@@ -1,0 +1,43 @@
+<div class="job_metrics">
+	<div class="metric">
+		<div class="number">
+			<%= minutes_to_hours_minutes job.time_spent %>
+		</div>
+		Time logged
+	</div>
+	<div class="metric">
+		<div class="number">
+			<%= minutes_to_hours_minutes job.remaining %>
+		</div>
+		Remaining
+	</div>
+	<div class="metric">
+		<div class="number">
+			<%= minutes_to_hours_minutes job.forecast %>
+		</div>
+		Forecast
+	</div>
+	<div class="metric">
+		<div class="number">
+			<%= minutes_to_hours_minutes(job.budget * 60) %>
+		</div>
+		Budget
+	</div>
+	<% outlook = job.outlook %>
+	<% if outlook >= 0 %>
+		<%= raw "<div class='metric metric_ahead'>" %>
+		<% message = "Under" %>
+		<% smilie = ":)" %>
+	<% else %>
+		<% outlook = outlook * -1 %>
+		<%= raw "<div class='metric metric_behind'>" %>
+		<% message = "Over" %>
+		<% smilie = ":(" %>
+	<% end %>
+		<div class="number">
+			<%= smilie + " " + minutes_to_hours_minutes(outlook) %>
+		</div>
+		<%= message %>
+	</div>
+	<div class="clear"></div>
+</div>

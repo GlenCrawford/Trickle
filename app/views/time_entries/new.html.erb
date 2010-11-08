@@ -1,0 +1,57 @@
+<%= form_for(@time_entry) do |f| %>
+	<p>
+		<label for="job_id">Job</label>
+		<select id="job_id">
+			<option value="">[Select a job]</option>
+			<% @jobs.each do |job| %>
+				<option value="<%= job.id %>"><%= job.name %></option>
+			<% end %>
+		</select>
+	</p>
+
+	<p>
+		<label for="task_id">Task</label>
+		<div id='throwaway'>&nbsp;</div>
+		<select name="time_entry[task_id]" id="task_id" style="display:none;"></select>
+		<img src="/images/lightview/loading.gif" id="fetching_tasks_loading_image" style="display:none;" />
+	</p>
+
+	<p>
+		<label for="time_spent_hours">Time spent on task</label>
+		<input type="text" id="time_spent_hours" name="time_entry[time_spent_hours]" style="width:30px;" maxlength="2" /> : 
+		<input type="text" id="time_spent_minutes" name="time_entry[time_spent_minutes]" style="width:30px;" maxlength="2" />
+		(hours : minutes)
+	</p>
+
+	<p>
+		<%= f.label :note %>
+		<%= f.text_area :note, {:id => 'notes', :cols => 43, :rows => 4} %>
+	</p>
+
+	<p>
+		<input type="checkbox" id="need_extra_time" name="time_entry[need_extra_time]" />
+		<label for="need_extra_time" style="float:none;">I need extra time</label>
+	</p>
+
+	<p id="extra_time_container">
+		<label for="extra_time">Extra time needed</label>
+		<input type="text" id="extra_time_hours" name="time_entry[extra_time_hours]" style="width:30px;" maxlength="2" /> : 
+		<input type="text" id="extra_time_minutes" name="time_entry[extra_time_minutes]" style="width:30px;" maxlength="2" />
+		(hours : minutes)
+	</p>
+
+	<p>
+		<%= f.submit "Add time entry" %>
+	</p>
+<% end %>
+
+<script type="text/javascript">
+	$('job_id').observe('change', get_tasks);
+	$('task_id').observe('change', enable_fields);
+	$('need_extra_time').observe('change', toggle_extra_time);
+
+	document.observe('lightview:opened', function(event) {
+		$('job_id').focus();
+		disable_fields();
+	});
+</script>

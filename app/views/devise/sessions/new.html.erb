@@ -1,0 +1,22 @@
+<% content_for :title, "Sign in" %>
+
+<p>Hullo! You need to sign in to use Trickle. Your administrator must have created an account for you; if he hasn't, go bug him for one now.</p>
+
+<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+	<p>
+		<%= f.label :username %>
+		<%= f.text_field :username %>
+	</p>
+
+	<p>
+		<%= f.label :password %>
+		<%= f.password_field :password %>
+	</p>
+
+	<p>
+		<%= f.label :remember_me %>
+		<%= f.check_box :remember_me %>
+	</p>
+
+	<%= f.submit "Sign in" %>
+<% end %>

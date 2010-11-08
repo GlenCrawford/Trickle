@@ -1,0 +1,46 @@
+<%= form_for(@project) do |f| %>
+	<% if @project.errors.any? %>
+		<div id="error_explanation">
+			<h2><%= pluralize(@project.errors.count, "error") %> prohibited this <%= @project.class.name.downcase %> from being saved:</h2>
+			<ul>
+				<% @project.errors.full_messages.each do |msg| %>
+					<li><%= msg %></li>
+				<% end %>
+			</ul>
+		</div>
+	<% end %>
+
+	<p>
+		<%= f.label :name, "Title" %>
+		<%= f.text_field :name %>
+	</p>
+
+	<p>
+		<%= f.label :budget %>
+		<%= f.text_field :budget %>
+		<span class="form_hint">Number of <strong>hours</strong> to allocate to this <%= @project.class.name.downcase %></span>
+	</p>
+
+	<p>
+		<%= f.label :client_id %>
+		<%= f.collection_select :client_id, Client.all, :id, :name %>
+		<%= link_to "Add a new client", new_client_path %>
+	</p>
+
+	<% if @project.is_job? %>
+		<h3 style="margin-top:-8px;">Team</h3>
+		<p>
+			<%= f.label :owner_id, "#{@project.class.name} owner" %>
+			<%= f.collection_select :owner_id, User.all, :id, :name %>
+		</p>
+
+		<% User.all.each do |user| %>
+			<p style="margin-top:2px; margin-bottom:2px;">
+				<%= f.label "user_#{user.id}", user.name %>
+				<%= check_box_tag "#{@project.class.name.downcase}[user_ids][]", user.id, @project.users.include?(user), {:id => "#{@project.class.name.downcase}_user_#{user.id}"} %>
+			</p>
+		<% end %>
+	<% end %>
+
+	<%= f.submit %>
+<% end %>

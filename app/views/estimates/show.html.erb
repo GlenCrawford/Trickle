@@ -1,0 +1,27 @@
+<% content_for :title, "Estimate: #{@estimate.name}" %>
+
+<%= raw jqgrid_stylesheets %>
+<%= raw jqgrid_javascripts %>
+
+<p>
+	<strong>Status:</strong> <%= @estimate.status.capitalize %>
+	<br />
+	<strong>Client:</strong> <%= @estimate.client.name %>
+	<br />
+	<strong>Budget:</strong> <%= @estimate.budget %> hours
+</p>
+
+<%= raw jqgrid("Items", "tasks", "/estimates/#{@estimate.id}",
+	[
+		{:field => "number", :label => "Number", :width => 28, :resizable => false},
+		{:field => "name", :label => "Name", :width => 240, :editable => true},
+		{:field => "note", :label => "Notes", :width => 70, :editable => true, :edittype => "textarea", :editoptions => {:rows => 3, :cols => 8}},
+		{:field => "billable", :label => "Billable", :width => 55, :editable => true, :edittype => "select", :editoptions => {:value => [["1", "Yes"], ["0", "No"]]}},
+		{:field => "resource_type_id", :label => "Resource type", :width => 95, :editable => true, :edittype => "select", :editoptions => {:data => [ResourceType.all, :id, :code]}},
+		{:field => "quantity", :label => "Quantity", :width => 65, :editable => true},
+		{:field => "unit_cost", :label => "Unit cost", :width => 60, :editable => false}
+	],
+	{:add => true, :edit => true, :inline_edit => true, :delete => true, :edit_url => "/estimates/post_tasks?project_id=#{@estimate.id}"}
+) %>
+
+<p><%= link_to 'Edit this estimate', edit_estimate_path(@estimate) %></p>

@@ -1,0 +1,9 @@
+<% content_for :title, "#{@client.name} (#{@client.code})" %>
+
+<p>
+	<strong>Client name:</strong> <%= @client.name %>
+	<br />
+	<strong>Client code:</strong> <%= @client.code %>
+</p>
+
+<p><%= link_to 'Edit this client', edit_client_path(@client) %></p>

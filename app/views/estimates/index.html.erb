@@ -1,0 +1,23 @@
+<% content_for :title, "List of Estimates" %>
+
+<% if @estimates.size == 0 %>
+	<p>There are no estimates in the system yet :(</p>
+<% else %>
+	<% @estimates.each do |estimate| %>
+		<div class="project_panel">
+			<strong><%= estimate.name %></strong>
+			<br />
+			Status: <%= estimate.status.capitalize %>
+			<br />
+			Client: <%= estimate.client.name %>
+			<div class="project_options">
+				<%= link_to 'Go to this estimate', estimate %> | 
+    			<%= link_to 'Edit this estimate', edit_estimate_path(estimate) %> | 
+    			<%= link_to 'Delete this estimate', estimate, :confirm => 'Are you sure?', :method => :delete %> | 
+				<%= link_to 'Convert to job', "/estimates/convert/#{estimate.id}" %>
+			</div>
+		</div>
+	<% end %>
+<% end %>
+
+<p><%= link_to 'Create a new estimate', new_estimate_path %></p>

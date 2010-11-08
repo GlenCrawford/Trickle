@@ -1,0 +1,135 @@
+<% content_for :title, "Job: #{@job.name}" %>
+
+<%= raw jqgrid_stylesheets %>
+<%= raw jqgrid_javascripts %>
+
+<p>
+	<strong>Status:</strong> <%= @job.status.capitalize %>
+	<br />
+	<strong>Client:</strong> <%= @job.client.name %>
+	<br />
+	<strong>Budget:</strong> <%= @job.budget %> hours
+	<br />
+	<strong>Owner:</strong> <%= @job.owner.name %>
+</p>
+
+<%= render :partial => "metrics", :locals => {:job => @job} %>
+
+<% if @job.outlook >= 0 %>
+	<% status = "ahead" %>
+<% else %>
+	<% status = "behind" %>
+<% end %>
+
+<div id="progress_bar">
+	<div id="progress" class="progress_<%= status %>" style="width:<%= @job.progress %>%;">
+		<% if @job.progress == 0 %>
+			<span id="no_progress">No progress</span>
+		<% else %>
+			<% if @job.progress >= 25 %>
+				Overall progress
+			<% end %>
+			<span id="percentage"><%= @job.progress %>%</span>
+		<% end %>
+	</div>
+</div>
+
+<h3>Team members assigned to this job</h3>
+<% @job.users.each do |user| %>
+	<div class="user_panel">
+		<div class="float-left">
+			<img src="<%= user.avatar %>" title="<%= user.name %>" alt="<%= user.name %>" class="avatar" />
+		</div>
+		<div class="float-right">
+			<%= user.name %>
+			<br />
+			<%= link_to "Go to profile", user %>
+		</div>
+	</div>
+<% end %>
+
+<div class="clear"></div>
+
+<!--
+<h3>Task breakdown</h3>
+<div id="accordion">
+	<% @job.tasks.each do |task| %>
+		<h3><a href="#"><%= task.name %></a></h3>
+		<div>
+			<p>
+				<strong>Status:</strong> <%= task.status.capitalize %>
+				<br />
+				<strong>Budget:</strong> <%= task.budget %> hours
+				<br />
+				<% if task.billable %>
+					This task <strong>is</strong> billable.
+				<% else %>
+					This task <strong>is not</strong> billable.
+				<% end %>
+			</p>
+			<% if task.note != "" %>
+				<p>
+					<em><%= task.note %></em>
+				</p>
+			<% end %>
+			<div class="task_time_entries">
+				<h4>Time entries</h4>
+				<% task.time_entries.each do |time_entry| %>
+					<div class="task_time_entry">
+						<div class="float-left">
+							<%= time_entry.user.name %> at <%= time_entry.created_at.to_date.to_formatted_s :long_ordinal %>
+							<% if time_entry.note != "" %>
+								<p class="task_time_entry_note"><%= time_entry.note %></p>
+							<% end %>
+							<% if time_entry.extra_time != 0 %>
+								<p class="task_time_entry_extra_time"><%= time_entry.user.first_name %> has requested an additional <strong><%= minutes_to_hours_minutes time_entry.extra_time %></strong> for this task.</p>
+							<% end %>
+						</div>
+						<div class="float-right">
+							<%= minutes_to_hours_minutes time_entry.time_spent %>
+						</div>
+						<div class="clear"></div>
+					</div>
+				<% end %>
+				<div class="task_total_time">
+					Total: <%= minutes_to_hours_minutes task.time_spent %>
+					<br />
+					<% time_entry_difference = (task.budget * 60) - task.time_spent %>
+					<% if time_entry_difference > 0 %>
+						<% status = "ahead" %>
+					<% elsif time_entry_difference < 0 %>
+						<% status = "behind"%>
+						<% time_entry_difference = time_entry_difference * -1 %>
+					<% else %>
+						<% status = "on" %>
+					<% end %>
+					This task is <%= minutes_to_hours_minutes time_entry_difference %> <%= status %> of schedule!
+				</div>
+			</div>
+		</div>
+	<% end %>
+</div>
+-->
+
+<%= raw jqgrid("Items", "tasks", "/jobs/#{@job.id}",
+	[
+		{:field => "number", :label => "Number", :width => 28, :resizable => false},
+		{:field => "name", :label => "Name", :width => 243, :editable => true},
+		{:field => "note", :label => "Notes", :width => 80, :editable => true, :edittype => "textarea", :editoptions => {:rows => 1, :cols => 8}},
+		{:field => "billable", :label => "Billable", :width => 55, :editable => true, :edittype => "checkbox", :editoptions => {:value => ["1", "0"]}},
+		{:field => "budget", :label => "Budget", :width => 50, :editable => true},
+		{:field => "status", :label => "Status", :width => 50, :editable => true, :edittype => "select", :editoptions => {:value => [["open", "Open"], ["completed", "Completed"]]}},
+		{:field => "user", :label => "User", :width => 105, :editable => true, :edittype => "select", :editoptions => {:data => [@job.users.all, :id, :name]}},
+	],
+	{:add => true, :edit => true, :inline_edit => true, :delete => true, :edit_url => "/jobs/post_tasks?project_id=#{@job.id}"}
+) %>
+<script type="text/javascript">
+	jQuery(document).ready(function() {
+		jQuery("#accordion").accordion({
+			collapsible: true,
+			active: false
+		});
+	});
+</script>
+
+<p><%= link_to 'Edit this job', edit_job_path(@job) %></p>

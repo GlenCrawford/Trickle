@@ -1,0 +1,64 @@
+<div class="sidebox">
+	<h1>Your recent activity</h1>
+	<% if user_signed_in? %>
+		<% if current_user.activities.size == 0 %>
+			<p>You haven't done anything yet!</p>
+		<% else %>
+			<ul id="activity">
+				<% activity_count = 0 %>
+				<% current_user.activities.reverse.each do |activity| %>
+					<% begin %>
+						<% activity_description = activity.print %>
+					<% rescue ActiveRecord::RecordNotFound %>
+						<% # Skip past any activities where the 'thing' has been deleted %>
+						<% next %>
+					<% end %>
+					<% activity_count += 1 %>
+					<li>
+						<%= activity_description %>
+						<span class="time">
+							<%= distance_of_time_in_words(activity.action_date, Time.now, true).capitalize %> ago. 
+							<% if activity_description.include? "'" and activity.action != "deleted" %>
+								<a href='/<%= activity.thing_type.pluralize %>/<%= activity.thing_id %>'>Go see this <%= activity.thing_type %></a>.
+							<% end %>
+						</span>
+					</li>
+					<% if activity_count == 5 %>
+						<% break %>
+					<% end %>
+				<% end %>
+			</ul>
+		<% end %>
+	<% else %>
+		<p>You'll have to sign in to see your activity.</p>
+	<% end %>
+</div>
+
+<div class="sidebox">
+	<h1>Your items</h1>
+	<% if user_signed_in? %>
+		<% if current_user.tasks.size == 0 %>
+			<p>You don't have any items yet!</p>
+		<% else %>
+			<ul class="sidebar_tasks_list">
+				<% task_count = 0 %>
+				<% current_user.tasks.each do |task| %>
+					<% task_count += 1 %>
+					<li>
+						<span class="sidebar_tasks_name"><%= task.name %></span>
+						<span class="sidebar_tasks_project_client">
+							<strong>Project:</strong> <%= link_to task.project.name, task.project %>
+							<br />
+							<strong>Client:</strong> <%= link_to task.project.client.name, task.project.client %>
+						</span>
+					</li>
+					<% if task_count == 5 %>
+						<% break %>
+					<% end %>
+				<% end %>
+			</ul>
+		<% end %>
+	<% else %>
+		<p>You'll have to sign in to see your items.</p>
+	<% end %>
+</div>

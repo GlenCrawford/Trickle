@@ -1,0 +1,701 @@
+* {
+ padding: 0;
+ margin: 0;
+}
+
+html {
+ overflow-y: scroll; /* Hack to force stupid firefox to always display a scrollbar */
+}
+
+body {
+ margin: 0;
+ padding: 0;
+ font: normal 80%/1.5em "Lucida Grande","Lucida Sans Unicode","Lucida Sans",Helvetica,sans-serif;
+ color: #555555;
+ background: #ffffff url(/images/background.jpg) repeat-x;
+ text-align: center;
+}
+
+.float-left {
+ float: left;
+}
+
+.float-right {
+ float: right;
+}
+
+.clear {
+ clear: both;
+}
+
+.round {
+ border-radius: 5px;
+ -webkit-border-radius: 5px;
+ -moz-border-radius: 5px;
+}
+
+/* links */
+a {
+ background: inherit;
+ color: #2da2bf;
+ text-decoration: none;
+ outline: none;
+}
+
+a:hover {
+ color: #2da2bf;
+ text-decoration: underline;
+}
+
+/* headings */
+h1, h2, h3 {
+ font: bold 1em 'Trebuchet MS', Tahoma, Sans-serif;
+}
+
+h1 {
+ font-size: 1.4em;
+ color: #555555;
+}
+
+h2 {
+ font-size: 1.2em;
+ padding-top: 5px;
+}
+
+h3 {
+ font-size: 1.2em;
+ margin-bottom: -10px !important;
+}
+
+p, h1, h2, h3 {
+ margin: 10px 15px;
+}
+
+/* images */
+img {
+ border: 1px solid #dadada;
+ padding: 5px;
+ background-color: #fafafa;
+}
+
+img.float-right {
+ margin: 5px 0px 5px 15px;
+}
+
+img.float-left {
+ margin: 5px 0 5px 10px;
+}
+
+p.float-left {
+ margin: 6px 7px;
+}
+
+/* tables */
+table {
+ border-collapse: collapse;
+ margin: 10px 15px;	
+ border: 1px solid #2da2bf;
+}
+
+th {
+ background-color: #2da2bf;
+ height: 29px;
+ padding-left: 11px;
+ padding-right: 11px;
+ color: #ffffff;
+ text-align: left;
+ border-left: 1px solid #2da2bf;
+ border-bottom: solid 2px #FFF;
+}
+
+tr {
+ height: 23px;
+}
+
+td {
+ padding-left: 11px;
+ padding-right: 11px;
+ border-bottom: 1px solid #2da2bf;
+}
+
+/* header */
+#header, #header-gap, 
+#content-wrap, #footer {
+ width: 952px;
+}
+
+#header {	
+ margin: 0 auto;
+ padding: 0;
+ position: relative;
+ height: 100px;
+ text-align: left;
+}
+
+#header ul {
+ position: absolute;
+ left: 206px;
+ top: 32px;
+ font: bolder 1.6em 'Trebuchet MS', sans-serif;
+ color: #ffffff;
+ list-style: none;
+ margin: 0;
+ padding: 0;
+}
+
+#header ul li {
+ display: inline;
+}
+
+#header ul li a {
+ float: left;
+ display: block;
+ padding: 3px 12px;	
+ color: #ffffff;
+ background-color: #333333;
+ text-decoration: none;
+ border-right: 1px solid #333333;
+}
+
+#header ul li a:hover {
+ background-color: #8dc63f;
+}
+
+#header ul li a#current {
+ background-color: #8dc63f;
+ color: #ffffff;
+}
+
+#header img {
+ border: 0;
+ padding: 0;
+ margin-top: 10px;
+}
+
+#header-gap {
+ margin: 0 auto;
+ height: 0;
+ padding: 10px 10px 0 10px;
+}
+
+/* user box */
+#header #user_box {
+ position: absolute;
+ right: 0;
+ top: 32px;
+ float: right;
+ padding: 7px;
+ font-size: 1.06em;
+ width: 275px;
+ background-color: #ffffff;
+ line-height: 1.3em;
+}
+
+/* sidebar */
+#sidebar {
+ float: right;
+ width: 30%;
+ margin: 0 0 10px 0;
+ padding: 0;	
+}
+
+/* sidebox */
+.sidebox {
+ background-color: #f5f5f5;
+ border: 1px solid #efeded;
+ margin-bottom: 10px;
+}
+
+.sidebox h1 {
+ padding: 10px 0px 5px 10px;
+ margin: 0;
+ font: bold 1.3em 'Trebuchet MS', Tahoma, Sans-serif;
+}
+
+/* content */
+#content-wrap {
+ text-align: left;	
+ padding: 0;
+ margin: 0 auto;
+}
+
+#content {
+ float: left;
+ width: 68%;	
+ margin: 0 0 10px 0;
+ padding: 0;
+ border: 1px solid #f2f2f2;
+ background-color: #ffffff;
+}
+
+#content h1 {
+ padding: 10px 0px 0px 5px;
+ margin: 0 0 0 10px;
+ border-bottom: 1px solid #f2f2f2; 	
+ font: normal 1.5em 'Trebuchet MS', Tahoma, Sans-serif;
+}
+
+#content ul {
+ margin: 10px 30px;
+ padding: 0 9px;		
+}
+
+#content ol {
+ margin: 10px 30px;
+ padding: 0 15px;		
+}
+
+#content .subheading {
+ font-weight: bold;
+ font-size: 1.2em;
+}
+
+/* footer */
+#footer {
+ clear: both;
+ margin: 0 auto;
+ padding: 0;
+ font: normal 0.95em/1.6em 'Trebuchet MS', Tahoma, Arial, sans-serif;
+ text-align: left;
+ margin-top: 10px;
+ border-top: 1px solid #eaeaea;
+ padding: 10px 0px;
+ text-align: center;
+}
+
+#footer a {
+ text-decoration: none;
+ color: #555555;
+}
+
+#footer a:hover {
+ text-decoration: underline;
+ color: #2da2bf;
+}
+
+/* flash messages */
+#alert, #notice {
+ margin: -3px 0 10px auto;
+ padding: 5px;
+ font-size: 1.1em;
+ color: #000000;
+}
+
+#notice {
+ border: 1px dashed #00cc00;
+ background-color: #98fb98;
+}
+
+#alert {
+ border: 1px dashed #d40109;
+ background-color: #ffb3b3;
+}
+
+/* forms */
+form label {
+ width: 125px;
+ float: left;
+ padding-right: 5px;
+}
+
+form input, form select {
+ width: 200px;
+ padding: 2px;
+}
+
+input[type="submit"] {
+ margin: -3px 0 9px 145px;
+ padding: 2px 4px;
+}
+
+input[type="checkbox"],
+input[type="radio"],
+input[type="submit"] {
+ width: auto;
+}
+
+form .form_hint {
+ display: block;
+ margin-left: 130px;
+ font-style: italic;
+}
+
+form h2 {
+	margin-left: 0;
+	margin-right: 0;
+	margin-top: 5px;
+}
+
+/* form errors */
+#error_explanation {
+  border: 1px dashed #d40109;
+  margin: 8px auto 0 auto;
+  width: 98%;
+}
+
+#error_explanation h2 {
+  text-align: left;
+  font-weight: normal;
+  padding: 5px 4px 0 4px;
+  font-size: 1.2em;
+  margin: 0;
+  margin-bottom: 0px;
+}
+
+#error_explanation ul {
+ margin: 0;
+ padding: 0 0 0 11px;
+}
+
+#error_explanation ul li {
+  font-size: 12px;
+  list-style: none;
+}
+
+/* user */
+.user_panel {
+ float: left;
+ margin: 10px 0 0 10px;
+ padding: 5px;
+ border: 1px solid #F2F2F2;
+}
+
+.user_panel:hover {
+ background-color: #F2F2F2;
+}
+
+.user_panel p {
+ margin: 11px 5px;
+}
+
+.user_role_selection {
+ width: 266px;
+}
+
+.user_role_selection label {
+ float: none;
+}
+
+.user_role_selection p {
+ margin-left: 0;
+}
+
+img.avatar {
+ width: 80px;
+ border: 0;
+}
+
+img.big_avatar {
+ max-width: 130px;
+}
+
+/* client */
+.client_panel {
+ width: 95%;
+ margin: 0 auto;
+ padding: 5px 10px;
+}
+
+.client_panel:hover {
+ background-color: #f2f2f2;
+}
+
+.client_panel div {
+ float: right;
+}
+
+/* activity */
+#activity {
+ padding: 0 0 0 26px;
+}
+
+#activity li {
+ margin-bottom: 2px;
+}
+
+#activity .time {
+ display: block;
+ font-size: 0.85em;
+ margin-top: -4px;
+}
+
+/* settings */
+#settings_form label {
+ width: 144px;
+}
+
+#settings_form .form_hint {
+ margin-left: 148px;
+}
+
+#settings_form input[type="submit"] {
+ margin-left: 164px;
+}
+
+/* estimates */
+.project_panel {
+ width: 95%;
+ padding: 5px;
+ margin: 0 auto;
+}
+
+.project_panel:hover {
+ background-color: #f2f2f2;
+}
+
+.project_panel .project_options {
+ margin-top: 3px;
+ clear: both;
+}
+
+/* jobs */
+.job_metrics {
+ margin-left: -13px;
+}
+
+.job_metrics .metric {
+ width: 125px;
+ text-align: center;
+ float: left;
+ padding: 8px 0 3px 0;
+}
+
+.job_metrics .number {
+ font-size: 2em;
+ margin-bottom: 6px;
+}
+
+.job_metrics .metric_ahead {
+ background-color: #98fb98;
+ border: 1px dashed #00cc00;
+}
+
+.job_metrics .metric_behind {
+ background-color: #ffb3b3;
+ border: 1px dashed #d40109;
+}
+
+#progress_bar {
+ width: 95%;
+ margin: 15px auto 0 auto;
+ border: 1px solid #000000;
+}
+
+#progress_bar #progress {
+ text-align: center;
+ padding: 2px;
+ line-height: 1.4em;
+ height: 18px;
+}
+
+#progress_bar #progress #no_progress {
+ width: 76px;
+ float: left;
+ margin-left: 5px;
+}
+
+#progress_bar #progress #percentage {
+ float: right;
+ padding-right :5px;
+}
+
+#progress_bar .progress_behind {
+ background-color: #ffb3b3;
+}
+
+#progress_bar .progress_ahead {
+ background-color: #98fb98;
+}
+
+#accordion p {
+ margin: 0 0 7px 0;
+}
+
+#accordion .task_time_entries .task_time_entry .task_time_entry_note {
+ margin: -3px 0 0 0;
+ font-style: italic;
+}
+
+#accordion .task_time_entries .task_time_entry .task_time_entry_extra_time {
+ margin: -3px 0 0 0;
+}
+
+#accordion .task_time_entries .task_time_entry {
+ margin-bottom: 3px;
+}
+
+#accordion .task_time_entries .task_total_time {
+ float: right;
+ clear: both;
+ font-weight: bold;
+ text-align: right;
+}
+
+/* accordion */
+#accordion {
+ margin: 12px auto 0 auto;
+ width: 611px;
+}
+
+#accordion h3 {
+ margin-bottom: 0 !important;
+}
+
+/* tasks */
+#gbox_tasks {
+ margin: 12px auto 0 auto;
+}
+
+.ui-jqgrid-titlebar {
+ height: 28px;
+}
+
+.ui-jqgrid-title {
+ font-size: 1.2em;
+ margin: 4px 0 0.1em 0.2em !important;
+}
+
+.ui-jqgrid-bdiv #tasks,
+.ui-jqgrid-hbox table {
+ width: 100% !important;
+}
+
+.ui-jqgrid-hdiv .ui-jqgrid-hbox {
+ padding-right: 0 !important;
+}
+
+.ui-jqgrid .ui-jqgrid-hbox {
+ float: none !important;
+}
+
+.EditTable {
+ margin: 0;
+ border: 0;
+}
+
+.FormGrid .ui-widget-content {
+ border: 0;
+}
+
+.FormGrid .ui-jqdialog-content .CaptionTD,
+.FormGrid .ui-jqdialog-content .DataTD {
+ border: 0;
+}
+
+.FormGrid .EditTable td select {
+ width: 90%;
+}
+
+.FormGrid .EditTable td textarea {
+ width: 89%;
+}
+
+.FormGrid .EditTable td input {
+ width: 86.5%;
+}
+
+.FormGrid .EditTable td input[type='checkbox'] {
+ width: auto;
+}
+
+form.FormGrid {
+ overflow: hidden !important;
+}
+
+.EditTable #Act_Buttons td {
+ border: 0;
+}
+
+.EditTable #Act_Buttons .EditButton {
+ padding: 0;
+}
+
+.ui-jqgrid .ui-pg-table td {
+ padding: 0 !important;
+}
+
+.ui-pager-control .ui-pg-table {
+ border: 0;
+}
+
+.ui-jqgrid-pager td {
+ border: 0;
+}
+
+.ui-jqgrid-htable {
+ border: 0;
+}
+
+.ui-jqdialog-content .DelTable {
+ margin: 0;
+}
+
+.DataTD {
+ text-align: left;
+}
+
+.EditTable td {
+ padding: 0;
+}
+
+/* sidebar tasks */
+ul.sidebar_tasks_list li {
+ margin-bottom: 5px;
+}
+
+.sidebox .sidebar_tasks_list {
+ padding: 0 0 0 26px;
+}
+
+.sidebox .sidebar_tasks_name {
+ display: block;
+}
+
+.sidebox .sidebar_tasks_project_client {
+ font-size: 0.9em;
+ display: block;
+ margin-top: -2px;
+}
+
+#sidebar li {
+ line-height: 1.3em;
+}
+
+/* time entries */
+#user_box #time_entry_button img {
+ width: 20px;
+ float: right;
+ margin-top: -1px;
+ margin-left: -4px;
+}
+
+#lightview #fetching_tasks_loading_image {
+ width: 18px;
+ border: 0;
+ padding: 0;
+}
+
+#lightview p {
+ margin: 5px 0;
+}
+
+#lightview input[type="text"] {
+ width: 364px;
+}
+
+#lightview select {
+ width: 240px;
+}
+
+#lightview .lv_Data .lv_DataText {
+ font-size: 1.2em;
+}
+
+#lightview input[type="submit"] {
+ margin: 0;
+}
+
+#lightview .lv_contentBottom {
+ width: 370px !important;
+ overflow: hidden !important;
+}

@@ -1,0 +1,52 @@
+<% content_for :title, "Settings" %>
+
+<%= form_for(@settings) do |f| %>
+  <% if @settings.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@settings.errors.count, "error") %> prohibited your settings from being saved:</h2>
+      <ul>
+      <% @settings.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+	<div id="settings_form">
+		<p>
+			<%= f.label :daily_resource_amount %>
+			<%= f.text_field :daily_resource_amount, :size => 10 %>
+			<span class="form_hint">Must be a positive, whole number</span>
+		</p>
+
+		<p>
+			<%= f.label :billable %>
+			<%= f.check_box :billable %>
+			<span class="form_hint" style="width:245px;">Will set the default. Can be changed on a case-by-case basis</span>
+		</p>
+
+		<p>
+			<%= f.label :company_code %>
+			<%= f.text_field :company_code %>
+			<span class="form_hint">The code and name of <strong>your</strong> company</span>
+		</p>
+
+		<p>
+			<%= f.label :company_name %>
+			<%= f.text_field :company_name %>
+		</p>
+
+		<p>
+			<%= f.label :low_utilization_level %>
+			<%= f.text_field :low_utilization_level, :size => 3 %> %
+			<span class="form_hint">These must be whole numbers</span>
+		</p>
+
+		<p>
+			<%= f.label :high_utilization_level %>
+			<%= f.text_field :high_utilization_level, :size => 3 %> %
+		</p>
+
+		<%= f.submit %>
+	</div>
+<% end %>

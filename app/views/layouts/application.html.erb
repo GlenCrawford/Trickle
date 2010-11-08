@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Trickle - <%=h yield :title %></title>
+		<%= stylesheet_link_tag :all %>
+		<%= javascript_include_tag 'prototype', 'scriptaculous', 'application', 'rails', 'lightview', 'builder', 'controls', 'dragdrop', 'effects', 'slider', 'sound', 'unittest' %>
+		<%= csrf_meta_tag %>
+	</head>
+	<body>
+		<div id="wrap">
+			<a name="top" title="Top of page"></a>
+			<div id="header">
+				<a href="<%= root_path %>" title="Trickle">
+					<img src="/images/logo.png" alt="Trickle" title="Trickle" />
+				</a>
+				<ul>
+					<li><%= link_to "Estimates", estimates_path %></li>
+					<li><%= link_to "Jobs", jobs_path %></li>
+					<li><%= link_to "Clients", clients_path %></li>
+					<li><%= link_to "Users", users_path %></li>
+					<li><%= link_to "Settings", '/settings' %></li>
+				</ul>
+				<div id="user_box" class="round">
+					<% if user_signed_in? %>
+						Signed in as <%= current_user.name %>. <%= link_to "Sign out", destroy_user_session_path %>.
+						<a href="#" id="time_entry_button">
+							<img src="/images/hourglass.gif" alt="Add a time entry" title="Add a time entry" />
+						</a>
+					<% else %>
+						Not signed in. <%= link_to "Sign in now", new_user_session_path %>.
+					<% end %>
+				</div>
+			</div>
+			<div id="header-gap">
+				&nbsp;
+			</div>
+			<div id="content-wrap">
+				<% if flash[:notice] %>
+					<div id="notice">
+						<%= flash[:notice] %>
+					</div>
+				<% end %>
+				<% if flash[:alert] %>
+					<div id="alert">
+						<%= flash[:alert] %>
+					</div>
+				<% end %>
+				<div id="sidebar">
+					<%= render :partial => 'layouts/sidebar' %>
+				</div>
+				<div id="content">
+					<h1><%= yield :title %></h1>
+					<%= yield %>
+				</div>
+				<div id="footer">
+					&copy; Glen Crawford, 2010 | <span title="Yay!">HTML5 compliant</span> | <a href="#top" title="Back to top">Back to top</a>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,18 @@
+<% content_for :title, "Clients" %>
+
+<% if @clients.size == 0 %>
+	<p>You don't have any clients yet :(</p>
+<% else %>
+	<% @clients.each do |client| %>
+		<div class="client_panel">
+			<%= "#{client.name} (#{client.code})" %>
+			<div>
+    			<%= link_to 'View this client', client %> | 
+				<%= link_to 'Edit this client', edit_client_path(client) %> | 
+				<%= link_to 'Delete this client', client, :confirm => 'Are you sure?', :method => :delete %>
+			</div>
+		</div>
+	<% end %>
+<% end %>
+
+<p><%= link_to 'Add a new client', new_client_path %></p>

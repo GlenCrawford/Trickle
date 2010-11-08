@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Trickle - <%=h yield :title %></title>
+		<%= stylesheet_link_tag :all %>
+		<%= javascript_include_tag :all %>
+		<%= csrf_meta_tag %>
+	</head>
+	<body>
+		<div id="wrap">
+			<a name="top" title="Top of page"></a>
+			<div id="header">
+				<a href="<%= root_path %>" title="Trickle">
+					<img src="/images/logo.png" alt="Trickle" title="Trickle" />
+				</a>
+				<ul>
+					<li><%= link_to "Estimates", root_path %></li>
+					<li><%= link_to "Jobs", root_path %></li>
+					<li><%= link_to "Clients", root_path %></li>
+					<li><%= link_to "Users", root_path %></li>
+					<li><%= link_to "Settings", root_path %></li>
+				</ul>
+				<div id="user_box" class="round">
+					Login stuff
+				</div>
+			</div>
+			<div id="header-gap">
+				&nbsp;
+			</div>
+			<div id="content-wrap">
+				<% if flash[:notice] %>
+					<div id="flash">
+						<%= flash[:notice] %>
+					</div>
+				<% end %>
+				<div id="sidebar">
+					<div class="sidebox">
+						<h1>Title</h1>
+					</div>
+				</div>
+				<div id="content">
+					<h1><%= yield :title %></h1>
+					<%= yield %>
+				</div>
+				<div id="footer">
+					&copy; Glen Crawford, 2010 | <a href="#top" title="Click here to return to the top of the page">Back to top</a>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
